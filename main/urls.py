@@ -18,6 +18,6 @@ from .import views
 
 app_name = 'main'
 urlpatterns = [
-    path('', views.guInfoCreate),
+    path('', views.apt_select),
 
 ]
