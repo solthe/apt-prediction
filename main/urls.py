@@ -18,6 +18,12 @@ from .import views
 
 app_name = 'main'
 urlpatterns = [
-    path('', views.apt_select),
+    path('', views.dataFormulate),
+    path('home',views.backtoHome, name='home'),
+    path('gu', views.guInfoCreate, name="guSelect"),
+    path('dong',views.dong_select, name="dongSelect"),
+    path('apt',views.apt_select, name="aptSelect"),
+    path('extra',views.extraInfo_select, name="extraSelect"),
+    path('predict', views.predictInput, name="predictInput")
 
 ]
