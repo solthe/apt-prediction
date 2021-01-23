@@ -7,10 +7,32 @@ from sklearn.preprocessing import LabelEncoder
 # Create your views here.
 
 lgb_model = ""
+predictedValue = ''
 
 def backtoHome(request):
 
-    return render(request, "MainPage.html")
+    return render(request, "index.html")
+
+def dongTest(request):
+        selected_gu = request.GET['selected_gu']
+
+        data = pd.read_csv('final_end.csv',index_col = 0)
+        seoulDongList = data["dong"].unique()
+
+        dongList = []
+
+        with open("gu/"+selected_gu+".txt","r", encoding='utf-8') as f:
+            Lines = f.readline()
+            selectdDongList = Lines.split(",")
+
+        finalDongList = []
+        for i in seoulDongList:
+            if i in selectdDongList:
+                finalDongList.append(i)
+
+        return render(request, "dongSelect.html",{"dongInfo":finalDongList,"guSelected": selected_gu})
+
+
 
 
 
@@ -28,7 +50,7 @@ def dataFormulate(request):
     global lgb_model
     lgb_model = lgb.train(params, train_ds, 1000, test_ds, verbose_eval=1000, early_stopping_rounds=100)
 
-    return redirect("main:home")
+    return redirect("main:guSelect")
 
 #기타 정보입력받는 뷰
 def extraInfo_select(request):
@@ -36,8 +58,6 @@ def extraInfo_select(request):
     selected_gu = request.POST['guSelected']
     selected_dong = request.POST['dongSelected']
     selected_apt = request.POST['slct']
-
-    print(selected_gu,selected_dong,selected_apt)
 
     return render(request, "extraSelect.html",{"aptSelected": selected_apt, "dongSelected":selected_dong,"guSelected": selected_gu})
 
@@ -52,7 +72,6 @@ def predictInput(request):
 
         #아파트랑 구 번호로 변환
 
-        print(selected_gu,selected_dong,selected_apt,selectedDate,selectedSize)
         data = pd.read_csv('final_end.csv')
 
         dong_enc = LabelEncoder().fit_transform(data['dong'])
@@ -66,11 +85,12 @@ def predictInput(request):
         apt_num = apt_num.drop_duplicates().reset_index(drop=True)
         found_apt_num =  int(apt_num[apt_num['apt']==selected_apt]['enc'])
 
-        print(found_dong_num,found_apt_num)
-
         result = price_pred(x1=selectedYear,x2=selectedMonth,x3=found_dong_num,x4=found_apt_num, x5=selectedSize)
-        print(result,"만원")
-        return redirect("main:home")
+        price = result[0]
+        global predictedValue
+        predictedValue = str(int(price // 10000))+ "억 "+str(int(price % 10000)) + "만원"
+        print(predictedValue)
+        return redirect("main:guSelect")
 
 #최종화면에서 가격예측해주는 함수
 def price_pred(x1, x2,x3,x4, x5=77.95, x6=0,x7=0,x8=0,x9=9,x10=1998):
@@ -115,11 +135,13 @@ def apt_select(request):
 def guInfoCreate(request):
     gu_dict = ['종로구','중구','용산구','성동구','광진구','동대문구','중랑구','성북구','강북구','도봉구','노원구','은평구','서대문구','마포구','양천구','강서구','구로구','금천구','영등포구','동작구','관악구','서초구','강남구','송파구','강동구']
 
+    global predictedValue
 
+    predicted = predictedValue
     # for i in gu_dict:
     #     with open("gu/"+i+".txt","r", encoding='utf-8') as f:
     #         Lines = f.readline()
     #         dongList = Lines.split(",")
     #         print(dongList)
 
-    return render(request, "guSelect.html", {"guInfo":gu_dict})
+    return render(request, "index.html", {"guInfo":gu_dict, "predictedPrice": predicted})
