@@ -86,6 +86,14 @@ img{
   margin-bottom: var(--mb-4);
   text-align: center;
 }
+
+.title-title{
+  position: relative;
+  font-size: var(--h2-font-size);
+  color: white;
+  
+  text-align: center;
+}
 .section-title::after{
   position: absolute;
   content: "";
@@ -111,6 +119,15 @@ img{
   width: calc(100% - 2rem);
   margin-left: var(--mb-2);
   margin-right: var(--mb-2);
+}
+.new-grid{
+  max-width: 1024px;
+  display: inline-block;
+  grid-template-columns: 100%;
+  grid-column-gap: 1em;
+  width: calc(100% - 1rem);
+  margin-left: var(--mb-1);
+  margin-right: var(--mb-1);
 }
 .l-header{
   width: 100%;
@@ -232,7 +249,7 @@ img{
   border-radius: .5rem;
 }
 .button__big{
-  display: inline-block;
+  display: display-box;
   background-color: var(--first-color);
   color: #fff;
   padding: .75rem 2.5rem;
@@ -261,7 +278,8 @@ img{
 
 /* ===== ABOUT =====*/
 .about__container{
-  row-gap: 2rem;
+  row-gap: 3rem;
+  column-gap: 3rem;
   text-align: center;
 }
 .about__subtitle{
@@ -273,6 +291,12 @@ img{
 .about__img img{
   width: 200px;
   border-radius: .5rem;
+}
+
+/* ===== 예측 결과 =====*/
+.pred__container{
+  row-gap: 3rem;
+  text-align: right;
 }
 
 /* ===== INFO =====*/

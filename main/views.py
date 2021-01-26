@@ -8,6 +8,9 @@ from sklearn.preprocessing import LabelEncoder
 
 lgb_model = ""
 predictedValue = ''
+predictedGu = ""
+predictedDong = ""
+predictedApt = ""
 
 def backtoHome(request):
 
@@ -88,8 +91,13 @@ def predictInput(request):
         result = price_pred(x1=selectedYear,x2=selectedMonth,x3=found_dong_num,x4=found_apt_num, x5=selectedSize)
         price = result[0]
         global predictedValue
+        global predictedGu
+        global predictedDong
+        global predictedApt
+        predictedGu = selected_gu
+        predictedDong = selected_dong
+        predictedApt = selected_apt
         predictedValue = str(int(price // 10000))+ "억 "+str(int(price % 10000)) + "만원"
-        print(predictedValue)
         return redirect("main:guSelect")
 
 #최종화면에서 가격예측해주는 함수
@@ -136,6 +144,9 @@ def guInfoCreate(request):
     gu_dict = ['종로구','중구','용산구','성동구','광진구','동대문구','중랑구','성북구','강북구','도봉구','노원구','은평구','서대문구','마포구','양천구','강서구','구로구','금천구','영등포구','동작구','관악구','서초구','강남구','송파구','강동구']
 
     global predictedValue
+    global predictedGu
+    global predictedDong
+    global predictedApt
 
     predicted = predictedValue
     # for i in gu_dict:
@@ -144,4 +155,4 @@ def guInfoCreate(request):
     #         dongList = Lines.split(",")
     #         print(dongList)
 
-    return render(request, "index.html", {"guInfo":gu_dict, "predictedPrice": predicted})
+    return render(request, "index.html", {"guInfo":gu_dict, "predictedPrice": predicted, "predictedGu":predictedGu,  "predictedDong":predictedDong,  "predictedApt":predictedApt})
