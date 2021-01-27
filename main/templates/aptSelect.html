@@ -186,14 +186,16 @@ button.grow_spin:hover::after {
     </style>
 </head>
 <body>
+  <link rel="stylesheet" href="/static/css/styles.css">
   <h1>아파트를 선택하세요</h1>
+  <br></br>
   <form action="{% url 'main:extraSelect' %}" method="POST" enctype="multipart/form-data" class="form-horizontal">
     {% csrf_token %}
   <div class="select">
     <input type="hidden" name="guSelected" value="{{guSelected}}"></input>
     <input type="hidden" name="dongSelected" value="{{dongSelected}}"></input>
     <select name="slct" id="slct">
-      <option selected disabled>Choose an option</option>
+      <option selected disabled>보기에서 선택하세요</option>
       {% for apt in aptInfo %}
       <option value='{{apt}}' name='selectedApt'> {{apt}}</option>
       {% endfor %}
@@ -201,7 +203,7 @@ button.grow_spin:hover::after {
   </div>
   <!-- <button type = submit id="nextButton" style = "visibility: hidden">Next</button> -->
   <div>
-  <button class="slide_from_left" type = submit id="nextButton" style = "visibility: hidden">NEXT</button>
+    <button class="slide_from_left" type = submit id="nextButton" style = "visibility: hidden">NEXT</button>
   </div>
   </form>
   <script type="text/javascript">

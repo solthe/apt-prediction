@@ -4,6 +4,22 @@ import numpy as np
 import lightgbm as lgb
 from sklearn.preprocessing import LabelEncoder
 
+import plotly.io as pio
+pio.templates.default = 'plotly_dark'
+
+import pandas as pd
+import numpy as np
+import requests
+from urllib.parse import urlparse
+import urllib.parse
+import time
+import plotly.express as px
+import plotly.graph_objects as go
+from haversine import haversine
+import chart_studio
+import chart_studio.plotly as py
+import chart_studio.tools as tls
+
 # Create your views here.
 
 lgb_model = ""
@@ -11,6 +27,7 @@ predictedValue = ''
 predictedGu = ""
 predictedDong = ""
 predictedApt = ""
+parkMapLink = ''
 
 def backtoHome(request):
 
@@ -94,10 +111,17 @@ def predictInput(request):
         global predictedGu
         global predictedDong
         global predictedApt
+        global parkMapLink
         predictedGu = selected_gu
         predictedDong = selected_dong
         predictedApt = selected_apt
         predictedValue = str(int(price // 10000))+ "억 "+str(int(price % 10000)) + "만원"
+
+        try:
+            parkMapLink = parkMapInfoCreate(predictedApt)
+        except:
+            parkMapLink = ''
+
         return redirect("main:guSelect")
 
 #최종화면에서 가격예측해주는 함수
@@ -147,6 +171,7 @@ def guInfoCreate(request):
     global predictedGu
     global predictedDong
     global predictedApt
+    global parkMapLink
 
     predicted = predictedValue
     # for i in gu_dict:
@@ -155,4 +180,61 @@ def guInfoCreate(request):
     #         dongList = Lines.split(",")
     #         print(dongList)
 
-    return render(request, "index.html", {"guInfo":gu_dict, "predictedPrice": predicted, "predictedGu":predictedGu,  "predictedDong":predictedDong,  "predictedApt":predictedApt})
+    return render(request, "index.html", {"guInfo":gu_dict, "predictedPrice": predicted, "predictedGu":predictedGu,  "predictedDong":predictedDong,  "predictedApt":predictedApt, 'parkMapLink' : parkMapLink})
+
+def parkMapInfoCreate(address):
+    apt_address = pd.read_csv('apt_address.csv')
+    park_after = pd.read_csv('parkWithLatLng_after.csv',usecols = ['city','gu','dong','park_name','park_type','park_area','name','id','lat','lng'])
+
+    username='Jeehoon-K'
+    api_key= '2mJ6DMkHJjm1oGEBYyn2'
+    chart_studio.tools.set_credentials_file(username=username,api_key=api_key)
+    fig = get_map(address, park_after,apt_address)
+    return py.plot(fig, filename = 'Monochrome', auto_open=False)
+
+def id(name, apt_address):
+  address = apt_address[apt_address['apt_name']==str(name)].reset_index()['address'][0]
+  url = 'https://dapi.kakao.com/v2/local/search/address.json?&query=' + str(address)
+  result = requests.get(urlparse(url).geturl(), headers={'Authorization': 'KakaoAK 10faa6da25b75ef0a75b555ae4e5d64e'}).json()
+  match_first = result['documents'][0]['address']
+  lat = float(match_first['y'])
+  lng = float(match_first['x'])
+  return [lat, lng]
+
+def get_close_index(apt_name, park_after, apt_address):
+  P = park_after['lat']-id(apt_name, apt_address)[0]
+  Q = park_after['lng']-id(apt_name, apt_address)[1]
+  s = [k for k in range(len(park_after)) if -0.01<P[k]<0.01]
+  l = [k for k in s if -0.02<Q[k]<0.02]
+  f = [k for k in l if haversine(id(apt_name,apt_address), [park_after['lat'][k],park_after['lng'][k]], unit = 'm') <= 500]
+  return f
+
+def get_map(address, park_after, apt_address):
+  f = get_close_index(address, park_after,apt_address)
+  C = []
+  for k in range(len(park_after)):
+    if k not in f:
+      C.append('blue')
+    else:
+      C.append('red')
+
+  park_after['color']=C
+
+  px.set_mapbox_access_token('pk.eyJ1Ijoiam9objEwMTAxMCIsImEiOiJja2tjOXN5OG0wbDA2Mm5wODVhZ3R1OW5rIn0.j37zc9C6hM8DCo0fLlRirg')
+
+  data = park_after.copy()
+  data['park_area'] = np.log(data['park_area'])
+  fig = go.Figure()
+  fig = px.scatter_mapbox(data, lat="lat", lon="lng",
+                          size= "park_area",
+                          hover_name="name",
+                          size_max=15,
+                          zoom=13,
+                          center={'lat':id(address,apt_address)[0],'lon':id(address,apt_address)[1]},
+                          color = 'color',
+                          title = 'Walkable Parks Near Me'
+                          )
+  fig.update_layout(mapbox_style="carto-darkmatter")
+
+
+  return fig

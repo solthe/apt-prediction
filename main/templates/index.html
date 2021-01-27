@@ -23,10 +23,10 @@
                 <div class="nav__menu" id="nav-menu">
                     <ul class="nav__list">
                         <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
-                        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
-                        <li class="nav__item"><a href="#info" class="nav__link">Info</a></li>
-                        <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
-                        <li class="nav__item"><a href="#trend" class="nav__link">Trend</a></li>
+                        <li class="nav__item"><a href="#about" class="nav__link">소개</a></li>
+                        <li class="nav__item"><a href="#info" class="nav__link">예측</a></li>
+                        <li class="nav__item"><a href="#contact" class="nav__link">결과</a></li>
+                        <li class="nav__item"><a href="#trend" class="nav__link"</a>Others</li>
                     </ul>
                 </div>
 
@@ -62,7 +62,7 @@
 
             <!--===== ABOUT =====-->
             <section class="about section " id="about">
-                <h2 class="section-title">About</h2>
+                <h2 class="section-title">프로젝트 소개</h2>
 
                 <div class="about__container bd-grid">
                     <div class="about__img">
@@ -81,9 +81,9 @@
             <!--===== INFO =====-->
 
             <section class="info section" id="info">
-                <h2 class="section-title">Insert Info</h2>
+                <h2 class="section-title">아파트 가격 예측</h2>
 
-                <h2 class="section-subtitle">정보 입력</h2>
+                <h2 class="section-subtitle">구 선택</h2>
                   <form action="{% url 'main:dongSelect' %}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                   {% csrf_token %}
                 <div class="about__container bd-grid">
@@ -160,7 +160,11 @@
                     </div>
 
                     <div>
-                        <img src="static/asset/blue seoul.png" alt="" class="info__img">
+                      {% if parkMapLink == '' %}
+                        <iframe width="500" height="400" frameborder="0" scrolling="no" src="//plotly.com/~solthe/13.embed"></iframe>
+                      {% else %}
+                        <iframe width="500" height="400" frameborder="0" scrolling="no" src={{parkMapLink}}></iframe>
+                      {% endif %}
                     </div>
                 </div>
 
@@ -169,11 +173,11 @@
 
             <!--===== TREND =====-->
             <section class="contact section" id="trend">
-                <h2 class="section-title">Trend</h2>
+                <h2 class="section-title">시각화/분석</h2>
                 <div class="info__container bd-grid">
                     <div>
                         <h2 class="about__subtitle">트렌드 한 눈에 보기</h2>
-                        <p class="about__text">2008년부터 2012년까지의 가격 변동 추이와 변화를 한 눈에 확인합니다.</p>
+                        <p class="about__text">2008년부터 2020년까지의 가격 변동 추이와 변화를 한 눈에 확인합니다.</p>
                     </div>
                     <br>
 
@@ -181,7 +185,7 @@
                         <iframe width="900" height="800" frameborder="0" scrolling="no" src="//plotly.com/~solthe/13.embed"></iframe>
                         <br>
                     <div class="info__container bd-grid">
-                        <iframe width="900" height="500" frameborder="0" scrolling="no" src="//plotly.com/~solthe/9.embed"></iframe>
+                        <iframe width="900" height="600" frameborder="0" scrolling="no" src="//plotly.com/~solthe/31.embed"></iframe>
                     </div>
                     </div>
                         </div>

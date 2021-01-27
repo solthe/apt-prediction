@@ -136,7 +136,7 @@ button {
   font-size: 1em;
   background: #4070f4;
   color: #fff;
-  border: 0.25rem solid #4070f4;
+  
   padding: 0.85em 0.75em;
   margin: 1rem;
   position: absolute;
@@ -250,12 +250,19 @@ button.grow_spin:hover::after {
     </style>
 </head>
 <body>
-  <div class="container">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <div class="info__container">
 
-    <h2>원하는 크기(평)와 예상 구매일을 </br>입력해주세요</h2>
-
+    <h1 class="title-title"> 원하는 크기(평)와 </br>예상 구매일을 입력해주세요</h1>
+    <br>
+    <br>
+    
     <form action="{% url 'main:predictInput' %}" method="POST" enctype="multipart/form-data" class="form-horizontal">
-      {% csrf_token %}
+      
+        {% csrf_token %}
+
+      <div class="info__container bd-grid">
+        <div class="about__img">
 
       <input type="hidden" name="guSelected" value="{{guSelected}}"></input>
       <input type="hidden" name="dongSelected" value="{{dongSelected}}"></input>
@@ -265,6 +272,7 @@ button.grow_spin:hover::after {
         <span class="highlight"></span>
         <span class="bar"></span>
       </div>
+    </div>
 
       <div class="group">
         <input type="month" required name="dateSelected" min="2021-01" max="2070-12">
@@ -272,7 +280,11 @@ button.grow_spin:hover::after {
         <span class="bar"></span>
 
       </div>
-      <button class="slide_from_left" type = submit id="nextButton" >NEXT</button>
+      <button class="slide_from_right" type = submit id="nextButton" >NEXT</button>
+    
+
+      <script src="/static/js/main.js"></script>
+    
 
     </form>
 </body>
