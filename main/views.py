@@ -214,9 +214,9 @@ def get_map(address, park_after, apt_address):
   C = []
   for k in range(len(park_after)):
     if k not in f:
-      C.append('blue')
+      C.append('공원')
     else:
-      C.append('red')
+      C.append('근방 공원')
 
   park_after['color']=C
 
@@ -232,7 +232,7 @@ def get_map(address, park_after, apt_address):
                           zoom=13,
                           center={'lat':id(address,apt_address)[0],'lon':id(address,apt_address)[1]},
                           color = 'color',
-                          title = 'Walkable Parks Near Me'
+                          title = '내 아파트 주변 공원'
                           )
   fig.update_layout(mapbox_style="carto-darkmatter")
 
