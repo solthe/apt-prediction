@@ -10,5 +10,3 @@ ybigta학회 DA팀 소규모 프로젝트
 
 # 사이트 구성
 
-
-<img src="/Users/jupiter/Desktop/Screen Shot 2021-02-07 at 1.07.09 AM.png" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
