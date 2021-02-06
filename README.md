@@ -9,4 +9,4 @@ ybigta학회 DA팀 소규모 프로젝트
   - Key Features: 아파트가 예측, 데이터 시각화
 
 # 사이트 구성
-
+![Alt text](http://Users/jupiter/Desktop/Screen Shot 2021-02-07 at 1.06.42 AM.png "Optional title") 
