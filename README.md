@@ -66,10 +66,13 @@
  메인 페이지는 여러 가지의 섹션으로 구분되어 있고, 각 섹션 별로 프로젝트 소개, 데이터 시각화 자료를 보여주는 구간이 있다.
 해당 프로젝트에서 백엔드 기능은 가격 예측 서비스를 구현하는데 주로 초점이 맞추어져 있다.
 
-3. 가격예측기능 
-![image](https://user-images.githubusercontent.com/61021101/107135982-add35b80-6942-11eb-9cfe-7f7f044a21c0.png)
+3. 가격예측기능
+<img src = "https://user-images.githubusercontent.com/61021101/107135982-add35b80-6942-11eb-9cfe-7f7f044a21c0.png" width="80%">
+
 * 다음과 같은 뷰 함수를 통해 사용자로부터 각종 입력값을 제공받으며, 모든 입력값을 받은 후에 모델이 예축할 수 있는 값으로 매핑이 이루어진다.
-![image](https://user-images.githubusercontent.com/61021101/107136012-fdb22280-6942-11eb-969a-eb797a24596c.png)
+
+<img src = "https://user-images.githubusercontent.com/61021101/107136012-fdb22280-6942-11eb-969a-eb797a24596c.png" width="80%">
+
 * 예측이 성공적으로 이루어지게 되면 다음과 같이 메인페이지의 결과 섹션에서 예측값과 함께 주변 공원 시각화 데이터가 렌더링된다.
 
 # Frontend Process
