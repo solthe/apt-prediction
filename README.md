@@ -56,7 +56,7 @@
   POST 방식을 통해 사용자로부터 입력정보를 받고 처리된 데이터가 알맞게 보여지도록 구현함.
   
  ### 웹페이지 기능 flowchart
-![image](https://user-images.githubusercontent.com/61021101/106378904-98fb4300-63eb-11eb-9d4f-0d1c3be15d13.png)
+ <img src = "https://user-images.githubusercontent.com/61021101/106378904-98fb4300-63eb-11eb-9d4f-0d1c3be15d13.png" width="80%">
 
 1. 서버 실행 & 예측모델 작동
  서버가 실행되고, 사용자가 웹 사이트 메인 url을 호출하게 되면 전처리 자료와 예측 모델 코드를 사용하여 아파트 예측 서비스를 제공할 수 있는
