@@ -79,8 +79,3 @@
 
 ![image](https://user-images.githubusercontent.com/61021101/106378946-d790fd80-63eb-11eb-8be6-7c44502134d7.png)
 
-# Result
-![image](https://user-images.githubusercontent.com/61021101/106378988-2048b680-63ec-11eb-893d-4bca470a1197.png)
-
-# Reference
-
