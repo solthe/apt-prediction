@@ -79,3 +79,47 @@
 
 ![image](https://user-images.githubusercontent.com/61021101/106378946-d790fd80-63eb-11eb-8be6-7c44502134d7.png)
 
+* **목표**: 예측 기능을 넣은 간단한 인터렉티브 웹페이지를 제작
+
+  - **JavaScript**: [ScrollReveal.js](https://scrollrevealjs.org/) 사용 스크롤 동작 추가
+  - **HTML**: 예측 기능, 시각화 그래프 임베딩 **CSS**: 지도 그래프와 통일한 테마로 디자인 통일
+  - **Key Features**: 아파트가 예측, 데이터 시각화
+
+# Website Overview
+
+* 크게 세 섹션으로 분류
+
+### 섹션 1: 프로젝트 소개
+
+* 홈페이지와 동별 가격 지도화
+
+* 프로젝트 소개글
+
+<img src = "https://user-images.githubusercontent.com/69390011/107136960-1fafa300-694b-11eb-9d31-fce0b160d88e.png" width = 60%>
+<img src = "https://user-images.githubusercontent.com/69390011/107137054-0eb36180-694c-11eb-9afa-551abe7ecb86.png" width = 60%>
+
+### 섹션 2: 예측 
+
+* **구 선택**
+<img src = "https://user-images.githubusercontent.com/69390011/107136802-b54a3300-6949-11eb-8931-f5e0084bcb55.png" width = 60%>
+
+* **동 선택**
+<img src = "https://user-images.githubusercontent.com/69390011/107136801-b4b19c80-6949-11eb-9545-d384f749d077.png" width = 60%>
+
+* **아파트 선택**
+<img src = "https://user-images.githubusercontent.com/69390011/107136800-b4b19c80-6949-11eb-9d5b-94dd8b3aee56.png" width = 60%>
+
+* **평수 및 날짜 선택**
+<img src = "https://user-images.githubusercontent.com/69390011/107136798-b4190600-6949-11eb-8e68-25ae643682c6.png" width = 60%>
+
+* **예측 결과**
+<img src = "https://user-images.githubusercontent.com/69390011/107136982-5ab1d680-694b-11eb-8e7b-984b88db1c3e.png" width = 60%>
+
+### 섹션 3: 시각화/분석
+
+* 동별 가격 추이
+
+* 서대문구 건축연도별 가격 추이
+
+<img src = "https://user-images.githubusercontent.com/69390011/107136804-b67b6000-6949-11eb-902f-aa05bc6f8652.png" width = 60%>
+<img src = "https://user-images.githubusercontent.com/69390011/107136803-b5e2c980-6949-11eb-9a77-cac5de6066c7.png" width = 60%>
